@@ -19,6 +19,7 @@ class PillsListTableViewController: UITableViewController {
     var emailSender = ""
     var fileName = "Report1"
     var messageBody = ""
+    let ref2 = Database.database().reference(withPath: "users")
     
     
     override func viewDidLoad() {
@@ -64,6 +65,9 @@ class PillsListTableViewController: UITableViewController {
         
         let pillsList = pills[indexPath.row]
         
+        
+        cell.textLabel?.text = pillsList.name
+
         configureCell(cell: cell, indexPath: indexPath)
         if let isIntakePills = pillsList.isIntake {
             
@@ -97,7 +101,7 @@ class PillsListTableViewController: UITableViewController {
         content.sound = UNNotificationSound.default
         //  content.threadIdentifier = "local-notification ttemp"
         
-        let ref2 = Database.database().reference(withPath: "users")
+        
         
         guard let uidUser2  = Auth.auth().currentUser?.uid else { return }
         ref2.child(uidUser2).child("pills").observe(.value) { (snapshot) in
@@ -183,9 +187,9 @@ class PillsListTableViewController: UITableViewController {
     // MARK: Configure Cell
     func configureCell(cell:UITableViewCell, indexPath: IndexPath ){
         let pillsList = pills[indexPath.row]
-        cell.textLabel?.text = pillsList.name
+    
         if  let dateStart = pillsList.startDate{
-            convertTimeInterval(cell: cell, timeInterval: dateStart)}
+            convertTimeInterval(cell: cell, timeInterval: dateStart)} 
         
         if let base64String = pillsList.photo {
             convertImage(cell: cell, imageString: base64String)
@@ -232,9 +236,9 @@ class PillsListTableViewController: UITableViewController {
     
     // MARK: = Convert Image
     
-    func convertImage(cell:UITableViewCell,imageString:String){
+    func convertImage(cell:UITableViewCell, imageString: String){
         guard  let decodedDate = Data(base64Encoded: imageString, options: Data.Base64DecodingOptions.ignoreUnknownCharacters) else{return}
-        guard let decodedImage = UIImage(data: decodedDate) else {return}
+        guard let decodedImage = UIImage(data: decodedDate)  else {return}
         cell.imageView?.image = decodedImage
         
     }
@@ -392,6 +396,11 @@ class PillsListTableViewController: UITableViewController {
         
         
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        ref2.removeAllObservers()
+    }
+    
     func convertFile(_ string: String, fileName: String)  {
         
         let fileNameLoop = "\(fileName).txt"

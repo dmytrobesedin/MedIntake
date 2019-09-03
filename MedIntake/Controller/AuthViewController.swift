@@ -81,7 +81,7 @@ class AuthViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear( animated)
         applyAuthVC()
-        if  let _   = Auth.auth().currentUser {
+        if (Auth.auth().currentUser != nil) {
             performSegue(withIdentifier: "Show", sender: self)
             
         }
@@ -140,12 +140,18 @@ class AuthViewController: UIViewController {
         
         
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        
+    }
     
     func logOrReg() {
         guard let name = nameTextField.text else{ return }
         guard let email = emailTextField.text else{return }
         guard let pass  = passwordTextField.text else {return}
         
+        
+        
+        Auth.auth()
         if isReg {
             if (!email.isEmpty && !pass.isEmpty) {
                 Auth.auth().signIn(withEmail: email, password: pass) { (result, error) in
@@ -205,5 +211,5 @@ extension AuthViewController: UITextFieldDelegate{
         }
         return true
     }
-    
+  
 }
