@@ -19,7 +19,7 @@ class PillsListTableViewController: UITableViewController {
     var emailSender = ""
     var fileName = "Report1"
     var messageBody = ""
-    let ref2 = Database.database().reference(withPath: "users")
+    let ref2 =  Database.database().reference(withPath: "users")
     
     
     override func viewDidLoad() {
@@ -71,7 +71,9 @@ class PillsListTableViewController: UITableViewController {
         configureCell(cell: cell, indexPath: indexPath)
         if let isIntakePills = pillsList.isIntake {
             
-            cellCheckbox(cell: cell, isIntake: isIntakePills)}
+            cellCheckbox(cell: cell, isIntake: isIntakePills)
+            
+        }
         tableViewCell(cell: cell)
         
         return cell
@@ -147,7 +149,7 @@ class PillsListTableViewController: UITableViewController {
     func comleteAction(at indexPath: IndexPath, tableView: UITableView) -> UIContextualAction {
         let action = UIContextualAction(style: .destructive, title: "Intake") { (action, view, completion) in
             guard let cell = tableView.cellForRow(at: indexPath) else {return}
-            let pillsList = self.pills[indexPath.row]
+            var pillsList = self.pills[indexPath.row]
             
             if let switchToggle = pillsList.isIntake{
                 let toggle = !switchToggle
@@ -217,8 +219,9 @@ class PillsListTableViewController: UITableViewController {
     
     // MARK: = Convert TimeInterval
     func convertTimeInterval(cell:UITableViewCell, timeInterval: TimeInterval){
+        let dateFormatterHelper = DateFormatterHelper()
         let date = Date(timeIntervalSinceNow: timeInterval)
-        let dateString = formatDate(date: date )
+        let dateString = dateFormatterHelper.formatDate(date: date)
         
         cell.detailTextLabel?.text = dateString
     }
@@ -226,8 +229,9 @@ class PillsListTableViewController: UITableViewController {
     
     
     func convertTimeIntervalInString(timeInterval: TimeInterval) ->  String{
+        let dateFormatterHelper = DateFormatterHelper()
         let date = Date(timeIntervalSinceNow: timeInterval)
-        let dateString = formatDate(date: date )
+        let dateString = dateFormatterHelper.formatDate(date: date )
         
         return dateString
     }
@@ -239,38 +243,40 @@ class PillsListTableViewController: UITableViewController {
     func convertImage(cell:UITableViewCell, imageString: String){
         guard  let decodedDate = Data(base64Encoded: imageString, options: Data.Base64DecodingOptions.ignoreUnknownCharacters) else{return}
         guard let decodedImage = UIImage(data: decodedDate)  else {return}
+      
         cell.imageView?.image = decodedImage
         
     }
-    func convertImageTImage(imageString:String) -> UIImage {
-        if  let decodedDate = Data(base64Encoded: imageString, options: Data.Base64DecodingOptions.ignoreUnknownCharacters){
-            if let decodedImage = UIImage(data: decodedDate){
-                return decodedImage
-            }
-            
-        }
-        return UIImage()
-    }
+//    func convertImageTImage(imageString:String) -> UIImage {
+//        if  let decodedDate = Data(base64Encoded: imageString, options: Data.Base64DecodingOptions.ignoreUnknownCharacters){
+//            if let decodedImage = UIImage(data: decodedDate){
+//                return decodedImage
+//            }
+//
+//        }
+//        return UIImage()
+//    }
     
     
     //MARK: Appply TableVIewStyle
     //MARK: - Apply TableViewCell Style
     
-    func tableViewCell(cell: UITableViewCell) {
-        cell.contentView.backgroundColor = backgroundColor
-        cell.backgroundColor = backgroundColor
+  private  func tableViewCell(cell: UITableViewCell) {
+    let theme = Theme()
+    cell.contentView.backgroundColor = theme.backgroundColor
+    cell.backgroundColor = theme.backgroundColor
         
-        cell.textLabel?.font = headlineFont
-        cell.textLabel?.textColor = headingTextColor
-        cell.textLabel?.backgroundColor = backgroundColor
+    cell.textLabel?.font = theme.headlineFont
+    cell.textLabel?.textColor = theme.headingTextColor
+    cell.textLabel?.backgroundColor = theme.backgroundColor
         
-        cell.detailTextLabel?.font = subtitleFont
-        cell.detailTextLabel?.textColor = subtitleTextColor
-        cell.detailTextLabel?.backgroundColor = backgroundColor
+    cell.detailTextLabel?.font = theme.subtitleFont
+    cell.detailTextLabel?.textColor = theme.subtitleTextColor
+    cell.detailTextLabel?.backgroundColor = theme.backgroundColor
     }
     
     // MARK: Reload DateBase
-    func loadDateFromFirebase()  {
+ private   func loadDateFromFirebase()  {
         //
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
@@ -297,6 +303,7 @@ class PillsListTableViewController: UITableViewController {
             print(error.localizedDescription)
         }
         
+        
     }
     
     
@@ -317,11 +324,12 @@ class PillsListTableViewController: UITableViewController {
             
             self.present(mailComposeViewController, animated: true, completion: nil)
         }else{
-            print("Can't send email")
+            let alertPresenter = AlertPresenter()
+            alertPresenter.showAlert(title:"Error", message: "Can't send email", viewController: self)
         }
         
     }
-    func createReport()  {
+  private func createReport()  {
         let refBase = Database.database().reference(withPath: "users")
         guard let  uidPerson  = Auth.auth().currentUser?.uid else {return}
         
@@ -341,7 +349,7 @@ class PillsListTableViewController: UITableViewController {
             if let dict = snapshot.value as? [String: Any] {// the value is a dict
                 
                 loopString = dict["email"] as? String ?? "email"
-                //   print("\(loopString) loves eeeee")
+             
                 
                 self.emailSender = loopString
             }
@@ -401,14 +409,15 @@ class PillsListTableViewController: UITableViewController {
         ref2.removeAllObservers()
     }
     
-    func convertFile(_ string: String, fileName: String)  {
+func convertFile(_ string: String, fileName: String)  {
         
         let fileNameLoop = "\(fileName).txt"
+
         let path = (NSTemporaryDirectory() as NSString).appendingPathComponent(fileNameLoop)
         do {
             try string.write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
         } catch {
-            
+        
         }
     }
     func randomString(length: Int) -> String {
@@ -432,11 +441,17 @@ class PillsListTableViewController: UITableViewController {
         
         if let data = (messageBody as String).data(using: String.Encoding.utf8){
             //Attach File
+            
+            
             mailComposeVC.addAttachmentData(data, mimeType: "text/plain", fileName: fileName)
         }
         mailComposeVC.setMessageBody("Hello, this is .txt report about pills intake", isHTML: false)
         return mailComposeVC
     }
+    
+    
+    
+    
     @IBAction func LogOutAction(_ sender: Any) {
         do {
             try Auth.auth().signOut()
@@ -452,8 +467,8 @@ class PillsListTableViewController: UITableViewController {
 }
 extension PillsListTableViewController: MFMailComposeViewControllerDelegate{
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: false, completion: nil)
+        controller.dismiss(animated: true, completion: nil)
         createReport()
     }
-   
+ 
 }

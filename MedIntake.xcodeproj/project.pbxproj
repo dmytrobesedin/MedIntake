@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D081424278CD439009DDCAB /* AuthViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D081423278CD439009DDCAB /* AuthViewPresenter.swift */; };
 		2D43C8F1229C4E290002BE47 /* PillsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43C8F0229C4E290002BE47 /* PillsListTableViewController.swift */; };
 		2D43C8F3229C7C8E0002BE47 /* AddPillsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43C8F2229C7C8E0002BE47 /* AddPillsTableViewController.swift */; };
 		2D43C8F6229C90BE0002BE47 /* Utlis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43C8F5229C90BE0002BE47 /* Utlis.swift */; };
@@ -14,10 +15,13 @@
 		2D92B9C9229D6BA4009F75B1 /* Pill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D92B9C8229D6BA4009F75B1 /* Pill.swift */; };
 		2D92B9CB229DFCD2009F75B1 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D92B9CA229DFCD2009F75B1 /* Theme.swift */; };
 		2D92B9CE229EBEF7009F75B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D92B9CD229EBEF7009F75B1 /* Assets.xcassets */; };
+		2D9F0763278DFF8700D98416 /* DateFormatterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F0762278DFF8700D98416 /* DateFormatterHelper.swift */; };
+		2D9F0765278DFFFE00D98416 /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F0764278DFFFE00D98416 /* AlertPresenter.swift */; };
 		2DAC8E29228C7D8500857DDF /* Human.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAC8E28228C7D8500857DDF /* Human.swift */; };
 		2DAC8E2C228CC32400857DDF /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAC8E2B228CC32400857DDF /* AuthViewController.swift */; };
 		2DB460F4228F0F3700FB70D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DB460F3228F0F3700FB70D8 /* GoogleService-Info.plist */; };
 		2DB8751F22A2D15100118FEB /* PillsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB8751E22A2D15100118FEB /* PillsTableViewCell.swift */; };
+		2DEB3F91277CAE52005257ED /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEB3F90277CAE52005257ED /* Comments.swift */; };
 		2DF4CB7B2289EBD500A1A815 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF4CB7A2289EBD500A1A815 /* AppDelegate.swift */; };
 		2DF4CB802289EBD500A1A815 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DF4CB7E2289EBD500A1A815 /* Main.storyboard */; };
 		2DF4CB852289EBD700A1A815 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DF4CB832289EBD700A1A815 /* LaunchScreen.storyboard */; };
@@ -28,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D081423278CD439009DDCAB /* AuthViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewPresenter.swift; sourceTree = "<group>"; };
 		2D43C8F0229C4E290002BE47 /* PillsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillsListTableViewController.swift; sourceTree = "<group>"; };
 		2D43C8F2229C7C8E0002BE47 /* AddPillsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPillsTableViewController.swift; sourceTree = "<group>"; };
 		2D43C8F5229C90BE0002BE47 /* Utlis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utlis.swift; sourceTree = "<group>"; };
@@ -35,10 +40,13 @@
 		2D92B9C8229D6BA4009F75B1 /* Pill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pill.swift; sourceTree = "<group>"; };
 		2D92B9CA229DFCD2009F75B1 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		2D92B9CD229EBEF7009F75B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2D9F0762278DFF8700D98416 /* DateFormatterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterHelper.swift; sourceTree = "<group>"; };
+		2D9F0764278DFFFE00D98416 /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
 		2DAC8E28228C7D8500857DDF /* Human.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Human.swift; sourceTree = "<group>"; };
 		2DAC8E2B228CC32400857DDF /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		2DB460F3228F0F3700FB70D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2DB8751E22A2D15100118FEB /* PillsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillsTableViewCell.swift; sourceTree = "<group>"; };
+		2DEB3F90277CAE52005257ED /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
 		2DF4CB772289EBD500A1A815 /* MedIntake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedIntake.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DF4CB7A2289EBD500A1A815 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2DF4CB7F2289EBD500A1A815 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -72,11 +80,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2D081422278CD40F009DDCAB /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2D081423278CD439009DDCAB /* AuthViewPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		2D43C8F4229C90A50002BE47 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				2D92B9CA229DFCD2009F75B1 /* Theme.swift */,
 				2D43C8F5229C90BE0002BE47 /* Utlis.swift */,
+				2D9F0762278DFF8700D98416 /* DateFormatterHelper.swift */,
+				2D9F0764278DFFFE00D98416 /* AlertPresenter.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -102,6 +120,8 @@
 		2DF4CB792289EBD500A1A815 /* MedIntake */ = {
 			isa = PBXGroup;
 			children = (
+				2D081422278CD40F009DDCAB /* Presenter */,
+				2DEB3F90277CAE52005257ED /* Comments.swift */,
 				2D43C8F4229C90A50002BE47 /* Source */,
 				2DF4CB8E2289EBEE00A1A815 /* Controller */,
 				2DF4CB8D2289EBE500A1A815 /* View */,
@@ -185,7 +205,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = DmytroBesedin;
 				TargetAttributes = {
 					2DF4CB762289EBD500A1A815 = {
@@ -279,15 +299,19 @@
 				2D92B9C9229D6BA4009F75B1 /* Pill.swift in Sources */,
 				2D820B3422A52AF900C9801C /* Role.swift in Sources */,
 				2DAC8E29228C7D8500857DDF /* Human.swift in Sources */,
+				2DEB3F91277CAE52005257ED /* Comments.swift in Sources */,
 				2D43C8F6229C90BE0002BE47 /* Utlis.swift in Sources */,
 				2DF6532122A1A64F008EEEB4 /* Report.swift in Sources */,
+				2D9F0763278DFF8700D98416 /* DateFormatterHelper.swift in Sources */,
 				2DAC8E2C228CC32400857DDF /* AuthViewController.swift in Sources */,
 				2D43C8F1229C4E290002BE47 /* PillsListTableViewController.swift in Sources */,
 				2DB8751F22A2D15100118FEB /* PillsTableViewCell.swift in Sources */,
 				2DF4CB922289EC5C00A1A815 /* Patient.swift in Sources */,
+				2D9F0765278DFFFE00D98416 /* AlertPresenter.swift in Sources */,
 				2DF4CB7B2289EBD500A1A815 /* AppDelegate.swift in Sources */,
 				2D92B9CB229DFCD2009F75B1 /* Theme.swift in Sources */,
 				2DF4CB902289EC0900A1A815 /* Doctor.swift in Sources */,
+				2D081424278CD439009DDCAB /* AuthViewPresenter.swift in Sources */,
 				2D43C8F3229C7C8E0002BE47 /* AddPillsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -340,6 +364,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -365,7 +390,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -400,6 +425,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -419,7 +445,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;

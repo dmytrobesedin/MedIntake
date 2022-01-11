@@ -19,7 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
       FirebaseApp.configure()
-        applyTheme()
+        
+        let theme = Theme()
+        theme.applyTheme()
+       
         let center = UNUserNotificationCenter.current()
         let options: UNAuthorizationOptions = [.alert, .sound]
         center.requestAuthorization(options: options) { (granted, error) in
@@ -32,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         // when you did't auth
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if user == nil {
-                self.showModalAuth()
+              //  self.showModalAuth()
                 
             }
             

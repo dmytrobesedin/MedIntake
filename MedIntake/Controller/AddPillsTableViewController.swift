@@ -70,47 +70,48 @@ class AddPillsTableViewController: UITableViewController {
         tableViewCellTheme(indentifire: "intakeCell")
     }
     
-    func applyStyleTextField()  {
-        imagePicker.view.backgroundColor = backgroundColor
+    private  func applyStyleTextField()  {
+        let theme = Theme()
+        imagePicker.view.backgroundColor =   theme.backgroundColor
         
-        nameTextField.font = standardTextFont
-        nameTextField.textColor = mainColor
-        nameTextField.tintColor = headingTextColor
+        nameTextField.font = theme.standardTextFont
+        nameTextField.textColor = theme.mainColor
+        nameTextField.tintColor = theme.headingTextColor
         
-        nameLabelOtlet.font? = headlineFont
-        nameLabelOtlet.textColor = headingTextColor
+        nameLabelOtlet.font? = theme.headlineFont
+        nameLabelOtlet.textColor = theme.headingTextColor
         
-        descriptionOutlet.font = standardTextFont
-        descriptionOutlet.textColor = mainColor
-        descriptionOutlet.tintColor = headingTextColor
+        descriptionOutlet.font = theme.standardTextFont
+        descriptionOutlet.textColor = theme.mainColor
+        descriptionOutlet.tintColor = theme.headingTextColor
         
-        descriptionLabelOutlet.font? = headlineFont
-        descriptionLabelOutlet.textColor = headingTextColor
+        descriptionLabelOutlet.font? = theme.headlineFont
+        descriptionLabelOutlet.textColor = theme.headingTextColor
         
-        countOutlet.font = standardTextFont
-        countOutlet.textColor = mainColor
-        countOutlet.tintColor = headingTextColor
+        countOutlet.font = theme.standardTextFont
+        countOutlet.textColor = theme.mainColor
+        countOutlet.tintColor = theme.headingTextColor
         
-        countLabelOutlet.font? = headlineFont
-        countLabelOutlet.textColor = headingTextColor
+        countLabelOutlet.font? = theme.headlineFont
+        countLabelOutlet.textColor = theme.headingTextColor
         
-        dateOfStartPills.font = standardTextFont
-        dateOfStartPills.textColor = mainColor
-        dateOfStartPills.tintColor = headingTextColor
+        dateOfStartPills.font = theme.standardTextFont
+        dateOfStartPills.textColor = theme.mainColor
+        dateOfStartPills.tintColor = theme.headingTextColor
         
-        dateOfStartLabelOutlet.font? = headlineFont
-        dateOfStartLabelOutlet.textColor = headingTextColor
+        dateOfStartLabelOutlet.font? = theme.headlineFont
+        dateOfStartLabelOutlet.textColor = theme.headingTextColor
         
         
-        pillsDatePicker.backgroundColor = backgroundColor
+        pillsDatePicker.backgroundColor = theme.backgroundColor
         
-        intakeLabelOutlet.font? = headlineFont
-        intakeLabelOutlet.textColor = headingTextColor
+        intakeLabelOutlet.font? = theme.headlineFont
+        intakeLabelOutlet.textColor = theme.headingTextColor
         
-        InTake.backgroundColor = backgroundColor
-        InTake.tintColor = headingTextColor
+        InTake.backgroundColor = theme.backgroundColor
+        InTake.tintColor = theme.headingTextColor
         
-        self.view.backgroundColor = backgroundColor
+        self.view.backgroundColor = theme.backgroundColor
         
     
     }
@@ -128,13 +129,14 @@ class AddPillsTableViewController: UITableViewController {
     
     func tableViewCellTheme(indentifire: String){
     let cell = self.tableView.dequeueReusableCell(withIdentifier:indentifire)
-        cell?.contentView.backgroundColor = backgroundColor
-        cell?.backgroundColor = backgroundColor
-        cell?.backgroundView?.backgroundColor  = backgroundColor
-        cell?.tintColor = backgroundColor
-        cell?.textLabel?.tintColor = backgroundColor
-        cell?.textLabel?.font = standardTextFont
-        cell?.textLabel?.textColor = mainColor
+        let theme = Theme()
+        cell?.contentView.backgroundColor = theme.backgroundColor
+        cell?.backgroundColor = theme.backgroundColor
+        cell?.backgroundView?.backgroundColor  = theme.backgroundColor
+        cell?.tintColor = theme.backgroundColor
+        cell?.textLabel?.tintColor = theme.backgroundColor
+        cell?.textLabel?.font = theme.standardTextFont
+        cell?.textLabel?.textColor = theme.mainColor
 
     
     }
@@ -163,7 +165,8 @@ class AddPillsTableViewController: UITableViewController {
             self.dismiss(animated: true, completion: nil)
         }
         else{
-            showAlert(title: "Error", message:"Some Trobless  with write to textField ", viewController: self)
+            let alertPresenter = AlertPresenter()
+            alertPresenter.showAlert(title: "Error", message:"Some Trobless  with write to textField ", viewController: self)
             
         }
         
@@ -183,8 +186,9 @@ class AddPillsTableViewController: UITableViewController {
     
     
     @IBAction func datePicker(_ sender: AnyObject) {
+        let dateFormatterHelper = DateFormatterHelper()
         dateTimeInterval = pillsDatePicker.date.timeIntervalSinceNow
-        dateOfStartPills.text  = formatDate(date: pillsDatePicker.date)
+        dateOfStartPills.text  = dateFormatterHelper.formatDate(date: pillsDatePicker.date)
         
     }
   
@@ -226,10 +230,8 @@ class AddPillsTableViewController: UITableViewController {
 
 extension AddPillsTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-// Local variable inserted by Swift 4.2 migrator.
-let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-
-        
+        // Local variable inserted by Swift 4.2 migrator.        
+        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         imagePicker.dismiss(animated: true, completion: nil)
         photoPills.image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage
         

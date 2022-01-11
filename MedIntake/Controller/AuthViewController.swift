@@ -9,10 +9,19 @@
 import UIKit
 import Firebase
 import FirebaseAuth
-import  MessageUI
+import MessageUI
+
+//1. класс работа с Firebase (FirebaseAuthManager // FirebaseDataManager)
+//2. класс класс которыц имеет методы вызова с класса Firebase
+//3. Добавить возможность сохранять в кейчейн пароли
+
+
+
 
 class AuthViewController: UIViewController {
-    var isReg: Bool = false{
+    
+    
+    private  var isReg: Bool = false{
         willSet{
             if newValue{
                 titleLabel.text = "Sign in"
@@ -47,6 +56,9 @@ class AuthViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     
     
+    //
+    lazy  var authViewPresenter = AuthViewPresenter(view: self)
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,10 +71,10 @@ class AuthViewController: UIViewController {
         
         
         // becomefirstResponder
-//        self.nameTextField.becomeFirstResponder()
-//        self.passwordTextField.becomeFirstResponder()
-//        self.emailTextField.becomeFirstResponder()
-//        
+        //        self.nameTextField.becomeFirstResponder()
+        //        self.passwordTextField.becomeFirstResponder()
+        //        self.emailTextField.becomeFirstResponder()
+        //        
         
         
         // move keyboard at display, when print information at textfield
@@ -101,104 +113,132 @@ class AuthViewController: UIViewController {
     
     
     @IBAction func loginButtonAction(_ sender: Any) {
-        logOrReg()
         
+        signInOrSignUp(presenter: authViewPresenter)
     }
     
     
     
     
-    func applyAuthVC()  {
-        nameTextField.font = standardTextFont
-        nameTextField.textColor = mainColor
-        nameTextField.tintColor = headingTextColor
+    private  func applyAuthVC()  {
+        let theme = Theme()
+        nameTextField.font =  theme.standardTextFont
+        nameTextField.textColor = theme.mainColor
+        nameTextField.tintColor = theme.headingTextColor
         
         
-        passwordTextField.font = standardTextFont
-        passwordTextField.textColor = mainColor
-        passwordTextField.tintColor = headingTextColor
+        passwordTextField.font = theme.standardTextFont
+        passwordTextField.textColor = theme.mainColor
+        passwordTextField.tintColor = theme.headingTextColor
         
-        emailTextField.font = standardTextFont
-        emailTextField.textColor = mainColor
-        emailTextField.tintColor = headingTextColor
+        emailTextField.font = theme.standardTextFont
+        emailTextField.textColor = theme.mainColor
+        emailTextField.tintColor = theme.headingTextColor
         
-        titleLabel.font? = registerTextFont
-        titleLabel.textColor = headingTextColor
+        titleLabel.font? = theme.registerTextFont
+        titleLabel.textColor = theme.headingTextColor
         
-        loginButtonOutlet.titleLabel?.font = headlineFont
-        loginButtonOutlet.titleLabel?.textColor = headingTextColor
-        
-        
-        haveAkkLabelOutlet.font? = headlineFont
-        haveAkkLabelOutlet.textColor = headingTextColor
-        
-        isRegisterOutlet.backgroundColor = backgroundColor
-        isRegisterOutlet.tintColor = headingTextColor
-        
-        self.view.backgroundColor = backgroundColor
+        loginButtonOutlet.titleLabel?.font = theme.headlineFont
+        loginButtonOutlet.titleLabel?.textColor = theme.headingTextColor
         
         
+        haveAkkLabelOutlet.font? = theme.headlineFont
+        haveAkkLabelOutlet.textColor = theme.headingTextColor
         
+        isRegisterOutlet.backgroundColor = theme.backgroundColor
+        isRegisterOutlet.tintColor = theme.headingTextColor
+        
+        self.view.backgroundColor = theme.backgroundColor
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        
-    }
-    
-    func logOrReg() {
+    func signInOrSignUp(presenter: AuthViewPresenter ) {
         guard let name = nameTextField.text else{ return }
         guard let email = emailTextField.text else{return }
         guard let pass  = passwordTextField.text else {return}
         
+        //        if isAuth{presenter.signInUser(email: email, pass: password)}
+        isReg ? presenter.signInUser(email: email, pass: pass) : presenter.signUpUser(name: name, email: email, pass: pass)
         
         
-        Auth.auth()
-        if isReg {
-            if (!email.isEmpty && !pass.isEmpty) {
-                Auth.auth().signIn(withEmail: email, password: pass) { (result, error) in
-                    if error == nil {
-                        self.dismiss(animated: true, completion: nil)
-                        self.performSegue(withIdentifier: "Show", sender: nil)
-                    }
-                    else{showAlert(title: "Error", message: "Some Trobless with \(error?.localizedDescription) ", viewController: self)}
-                }
-                
-            }
-            else{
-                showAlert(title: "Error", message:"Some Trobless  with write to textField ", viewController: self)
-                
-            }
-        }
-            
-            
-        else {
-            if (!email.isEmpty && !pass.isEmpty && !name.isEmpty) {
-                Auth.auth().createUser(withEmail: email, password: pass) { (result, error) in
-                    if error == nil {
-                        
-                        if let result = result{
-                            
-                            let ref = Database.database().reference(withPath: "users")
-                            let childByAutoIdRole =  ref.childByAutoId()
-                            let uidRole = childByAutoIdRole.key
-                            ref.child(result.user.uid).updateChildValues(["uid": result.user.uid, "name": name, "email" : email ,"uidRole": uidRole])
-                            
-                            
-                            self.dismiss(animated: true, completion: nil)
-                            self.performSegue(withIdentifier: "Show", sender: nil)
-                        }
-                    }else{
-                        showAlert(title: "Error", message:"Some Trobless with \(error?.localizedDescription) ", viewController: self)}
-                }
-                
-            }
-            else{
-                showAlert(title: "Error", message:"Some Trobless  with write to textField ", viewController: self)
-                
-            }
-        }
     }
+    
+    //    func logOrReg() {
+    //        guard let name = nameTextField.text else{ return }
+    //        guard let email = emailTextField.text else{return }
+    //        guard let pass  = passwordTextField.text else {return}
+    //
+    //
+    //
+    //
+    //        if isReg {
+    //
+    //            if (!email.isEmpty && !pass.isEmpty) {
+    //                Auth.auth().signIn(withEmail: email, password: pass) { (result, error) in
+    //                    if error == nil {
+    //                        self.dismiss(animated: true, completion: nil)
+    //                        self.performSegue(withIdentifier: "Show", sender: nil)
+    //                    }
+    //                    else{showAlert(title: "Error", message: "Some Trobless with \(error?.localizedDescription) ", viewController: self)}
+    //                }
+    //
+    //            }
+    //            else{
+    //                showAlert(title: "Error", message:"Some Trobless  with write to textField ", viewController: self)
+    //
+    //            }
+    //        }
+    //
+    //
+    //        else {
+    //            if (!email.isEmpty && !pass.isEmpty && !name.isEmpty) {
+    ////                Auth.auth().createUser(withEmail: <#T##String#>, password: <#T##String#>) { <#AuthDataResult?#>, <#Error?#> in
+    ////                    <#code#>
+    ////                }
+    //                Auth.auth().createUser(withEmail: email, password: pass) { (result, error) in
+    //                    if error == nil {
+    //
+    //                        if let result = result{
+    //
+    //                            let ref = Database.database().reference(withPath: "users")
+    //                            let childByAutoIdRole =  ref.childByAutoId()
+    //                            let uidRole = childByAutoIdRole.key
+    //                            ref.child(result.user.uid).updateChildValues(["uid": result.user.uid, "name": name, "email" : email ,"uidRole": uidRole])
+    //
+    //
+    //                            self.dismiss(animated: true, completion: nil)
+    //                            self.performSegue(withIdentifier: "Show", sender: nil)
+    //                        }
+    //                    }else{
+    //                        showAlert(title: "Error", message:"Some Trobless with \(error?.localizedDescription) ", viewController: self)}
+    //                }
+    //
+    //            }
+    //            else{
+    //                showAlert(title: "Error", message:"Some Trobless  with write to textField ", viewController: self)
+    //
+    //            }
+    //        }
+    //    }
+    
 }
-extension AuthViewController: UITextFieldDelegate{
+extension AuthViewController: UITextFieldDelegate,AuthViewProtocol{
+    
+    
+    //
+    func performToMainScreen() {
+        
+        self.dismiss(animated: true)
+        self.performSegue(withIdentifier: "Show", sender: nil)
+        
+    }
+    
+    
+    func showAlertMessage(title: String, message: String) {
+        let alertPresenter = AlertPresenter()
+        alertPresenter.showAlert(title: title, message: message, viewController: self)
+    }
+    
+    
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == emailTextField{
             emailTextField.resignFirstResponder()}
@@ -207,9 +247,13 @@ extension AuthViewController: UITextFieldDelegate{
             nameTextField.resignFirstResponder()}
         if textField == passwordTextField {
             passwordTextField.resignFirstResponder()
-            logOrReg()
+            signInOrSignUp(presenter: authViewPresenter)
+            // logOrReg()
         }
         return true
     }
-  
+    
+    
+    
+    
 }
