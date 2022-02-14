@@ -16,15 +16,29 @@ class PillsListTableViewController: UITableViewController {
     @IBOutlet weak var reportButtonOutlet: UIBarButtonItem!
     
     var pills = [Pill]()
+    var intendedPills = [IntendedMedicine]()
     var emailSender = ""
     var fileName = "Report1"
     var messageBody = ""
+    
+    
+    let firebaaseService = FirebaseService()
     let ref2 =  Database.database().reference(withPath: "users")
+
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadDateFromFirebase()
+        
+        
+        
+        
+       // loadDateFromFirebase()
+        
+        
+        
+        
+        
         fileName = randomString(length: 8)
         notificationPill()
      
@@ -42,9 +56,9 @@ class PillsListTableViewController: UITableViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        createMailAtSend()
-        createMessageBox()
-        
+      //  createMailAtSend()
+    //createMessageBox()
+    
     }
     
     // MARK: - Table view data source
@@ -56,22 +70,24 @@ class PillsListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return pills.count
+        return intendedPills.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PillsListCell", for: indexPath)
         
-        let pillsList = pills[indexPath.row]
+        let pillsList = intendedPills[indexPath.row]
         
         
         cell.textLabel?.text = pillsList.name
 
         configureCell(cell: cell, indexPath: indexPath)
-        if let isIntakePills = pillsList.isIntake {
+        
+        if let  isIntakePill = pillsList.isIntake  {
             
-            cellCheckbox(cell: cell, isIntake: isIntakePills)
+            let viewControllerHelper = ViewControllerHelper()
+            viewControllerHelper.cellCheckbox(cell: cell, isIntake: isIntakePill) 
             
         }
         tableViewCell(cell: cell)
@@ -106,50 +122,52 @@ class PillsListTableViewController: UITableViewController {
         
         
         guard let uidUser2  = Auth.auth().currentUser?.uid else { return }
-        ref2.child(uidUser2).child("pills").observe(.value) { (snapshot) in
-            for list in snapshot.children{
-                if let listLoop = list as? DataSnapshot{
-                    let pillsList = Pill(snapShot: listLoop)
-                    if let istake = pillsList.isIntake{
-                        if istake == false{
-                            
-                  
-                            if let namePill = pillsList.name {
-                                if let desc = pillsList.description{
-                                    if let count = pillsList.count{
-                                        content.title = "Hello, you have intake: \(namePill)"
-                                        content.subtitle = "Rule- \(desc), count - \(count) "
-                                        
-                                        
-                                        if let timeInterval = pillsList.startDate{
-                                            
-                                            let date = Date(timeIntervalSinceNow: timeInterval)
-                                            let georgian = Calendar(identifier: .gregorian)
-                                            let dateComponent = georgian.dateComponents([.year,.day, .month, .hour, .minute], from: date)
-                                            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
-                                            let request = UNNotificationRequest(identifier: "content", content: content, trigger: trigger)
-                                            center.add(request) { (error) in
-                                                if error != nil{
-                                                    print(error?.localizedDescription)
-                                                }
-                                            }
-                                            
-                                        }
-                                    }
-                                    
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+//        ref2.child(uidUser2).child("pills").observe(.value) { (snapshot) in
+//            for list in snapshot.children{
+//                if let listLoop = list as? DataSnapshot{
+//                    let pillsList = Pill(listLoop)
+//                    if let istake = pillsList.isIntake{
+//                        if istake == false{
+//                            
+//                  
+//                            if let namePill = pillsList.name {
+//                                if let desc = pillsList.description{
+//                                    if let count = pillsList.count{
+//                                        content.title = "Hello, you have intake: \(namePill)"
+//                                        content.subtitle = "Rule- \(desc), count - \(count) "
+//                                        
+//                                        
+//                                        if let timeInterval = pillsList.startDate{
+//                                            
+//                                            let date = Date(timeIntervalSinceNow: timeInterval)
+//                                            let georgian = Calendar(identifier: .gregorian)
+//                                            let dateComponent = georgian.dateComponents([.year,.day, .month, .hour, .minute], from: date)
+//                                            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
+//                                            let request = UNNotificationRequest(identifier: "content", content: content, trigger: trigger)
+//                                            center.add(request) { (error) in
+//                                                if error != nil{
+//                                                    print(error?.localizedDescription)
+//                                                }
+//                                            }
+//                                            
+//                                        }
+//                                    }
+//                                    
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
     
     func comleteAction(at indexPath: IndexPath, tableView: UITableView) -> UIContextualAction {
         let action = UIContextualAction(style: .destructive, title: "Intake") { (action, view, completion) in
             guard let cell = tableView.cellForRow(at: indexPath) else {return}
-            var pillsList = self.pills[indexPath.row]
+            
+            
+            var pillsList = self.intendedPills[indexPath.row]
             
             if let switchToggle = pillsList.isIntake{
                 let toggle = !switchToggle
@@ -164,7 +182,7 @@ class PillsListTableViewController: UITableViewController {
             completion(true)
         }
         
-        let pillsList = self.pills[indexPath.row]
+        let pillsList = self.intendedPills[indexPath.row]
         let switchToggle = pillsList.isIntake
         action.image = UIImage(named:"Check")
         if switchToggle == false{
@@ -188,7 +206,7 @@ class PillsListTableViewController: UITableViewController {
     
     // MARK: Configure Cell
     func configureCell(cell:UITableViewCell, indexPath: IndexPath ){
-        let pillsList = pills[indexPath.row]
+        let pillsList = intendedPills[indexPath.row]
     
         if  let dateStart = pillsList.startDate{
             convertTimeInterval(cell: cell, timeInterval: dateStart)} 
@@ -280,17 +298,22 @@ class PillsListTableViewController: UITableViewController {
         //
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
-        let ref = Database.database().reference(withPath: "users")
-        guard let  uidUser  = Auth.auth().currentUser?.uid else {return}
-        ref.child(uidUser).child("pills").queryOrdered(byChild:"intake").observe(DataEventType.value, with: { (snapshot) in
+  
+    firebaaseService.loadPillFromFirebase { snapshot, error in
+        if error == nil {
+            guard let snapShot = snapshot else{return}
+            var newPillsList = [IntendedMedicine]()
             
-            
-            var newPillsList = [Pill]()
-            
-            for list in snapshot.children{
+            for list in snapShot.children{
                 if let listLoop = list as? DataSnapshot{
                     
-                    let pillsList = Pill(snapShot: listLoop)
+                    let pillsList = IntendedMedicine(snapShot: listLoop, completionHandler: {
+                        print($0)
+                        
+                        
+                        
+                        
+                    })
                     
                     newPillsList.append(pillsList)
                 }
@@ -299,11 +322,16 @@ class PillsListTableViewController: UITableViewController {
             self.tableView.reloadData()
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             
-        }) { (error) in
-            print(error.localizedDescription)
         }
-        
-        
+        else {
+            let alertPresenter = AlertPresenter()
+         
+            guard let localizedDescription = error?.localizedDescription else{return}
+
+            alertPresenter.showAlert(title: error.debugDescription, message: localizedDescription, viewController: self)
+        }
+    }
+   
     }
     
     
@@ -363,44 +391,44 @@ class PillsListTableViewController: UITableViewController {
         var loopString = ""
         let ref2 = Database.database().reference(withPath: "users")
         
-        guard let uidUser2  = Auth.auth().currentUser?.uid else { return }
-        ref2.child(uidUser2).child("pills").observe(.value) { (snapshot) in
-            for list in snapshot.children{
-                if let listLoop = list as? DataSnapshot{
-                    
-                    let pillsList = Pill(snapShot: listLoop)
-                    loopString += "Name - "
-                    loopString += pillsList.name  ?? "Name"
-                  
-                    
-                    loopString.append(", ")
-                    loopString += "description - "
-                    loopString += pillsList.description  ?? "descript"
-         
-                    loopString.append(", ")
-                    loopString += "date Intake - "
-                    if let timeInterval = pillsList.startDate  {
-                        loopString += self.convertTimeIntervalInString(timeInterval: timeInterval)
-                        loopString.append(", ")
-                        loopString += "Intake - "
-                        if let istaken = pillsList.isIntake{
-                            loopString += self.isIntake(sender: istaken)
-                            loopString.append(".")
-                            loopString.append("\n")
-                            
-                            self.messageBody = loopString
-                            
-                            
-                            
-                            
-                        }
-                        
-                    }
-                }
-            }
-        }
-        
-        
+//        guard let uidUser2  = Auth.auth().currentUser?.uid else { return }
+//        ref2.child(uidUser2).child("pills").observe(.value) { (snapshot) in
+//            for list in snapshot.children{
+//                if let listLoop = list as? DataSnapshot{
+//                    
+//                    let pillsList = Pill(snapShot: listLoop)
+//                    loopString += "Name - "
+//                    loopString += pillsList.name  ?? "Name"
+//                  
+//                    
+//                    loopString.append(", ")
+//                    loopString += "description - "
+//                    loopString += pillsList.description  ?? "descript"
+//         
+//                    loopString.append(", ")
+//                    loopString += "date Intake - "
+//                    if let timeInterval = pillsList.startDate  {
+//                        loopString += self.convertTimeIntervalInString(timeInterval: timeInterval)
+//                        loopString.append(", ")
+//                        loopString += "Intake - "
+//                        if let istaken = pillsList.isIntake{
+//                            loopString += self.isIntake(sender: istaken)
+//                            loopString.append(".")
+//                            loopString.append("\n")
+//                            
+//                            self.messageBody = loopString
+//                            
+//                            
+//                            
+//                            
+//                        }
+//                        
+//                    }
+//                }
+//            }
+//        }
+//        
+//        
         
         
     }

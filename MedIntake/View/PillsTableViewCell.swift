@@ -24,6 +24,7 @@ class PillsTableViewCell: UITableViewCell {
     func refresh(model: Pill){
         textLabel?.text = model.name
         detailTextLabel?.text = model.description
+
     }
   
 }

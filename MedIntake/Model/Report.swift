@@ -10,9 +10,9 @@ import Foundation
 import Firebase
 class Report {
     
+    var uidReport: String?
     var fileName: String?
     var text: String?
-    var uidReport: String?
     var uidUser: String?
     let link: DatabaseReference?
     

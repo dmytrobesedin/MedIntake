@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2D081424278CD439009DDCAB /* AuthViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D081423278CD439009DDCAB /* AuthViewPresenter.swift */; };
+		2D20FDD427A05EF600432A5A /* SearchPillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20FDD327A05EF600432A5A /* SearchPillViewController.swift */; };
+		2D20FDD827A30F9D00432A5A /* ViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20FDD727A30F9D00432A5A /* ViewControllerHelper.swift */; };
+		2D20FDDA27A5639400432A5A /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20FDD927A5639400432A5A /* Test.swift */; };
 		2D43C8F1229C4E290002BE47 /* PillsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43C8F0229C4E290002BE47 /* PillsListTableViewController.swift */; };
 		2D43C8F3229C7C8E0002BE47 /* AddPillsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43C8F2229C7C8E0002BE47 /* AddPillsTableViewController.swift */; };
 		2D43C8F6229C90BE0002BE47 /* Utlis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43C8F5229C90BE0002BE47 /* Utlis.swift */; };
@@ -21,6 +24,10 @@
 		2DAC8E2C228CC32400857DDF /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAC8E2B228CC32400857DDF /* AuthViewController.swift */; };
 		2DB460F4228F0F3700FB70D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DB460F3228F0F3700FB70D8 /* GoogleService-Info.plist */; };
 		2DB8751F22A2D15100118FEB /* PillsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB8751E22A2D15100118FEB /* PillsTableViewCell.swift */; };
+		2DC21230278F129200EE5112 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC2122F278F129200EE5112 /* User.swift */; };
+		2DC21232278F27CB00EE5112 /* Treatment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC21231278F27CB00EE5112 /* Treatment.swift */; };
+		2DC21236278F32C200EE5112 /* IntendedMedicine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC21235278F32C200EE5112 /* IntendedMedicine.swift */; };
+		2DD904A427B2AA4B002A7760 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD904A327B2AA4B002A7760 /* FirebaseService.swift */; };
 		2DEB3F91277CAE52005257ED /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEB3F90277CAE52005257ED /* Comments.swift */; };
 		2DF4CB7B2289EBD500A1A815 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF4CB7A2289EBD500A1A815 /* AppDelegate.swift */; };
 		2DF4CB802289EBD500A1A815 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DF4CB7E2289EBD500A1A815 /* Main.storyboard */; };
@@ -33,7 +40,10 @@
 
 /* Begin PBXFileReference section */
 		2D081423278CD439009DDCAB /* AuthViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewPresenter.swift; sourceTree = "<group>"; };
-		2D43C8F0229C4E290002BE47 /* PillsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillsListTableViewController.swift; sourceTree = "<group>"; };
+		2D20FDD327A05EF600432A5A /* SearchPillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPillViewController.swift; sourceTree = "<group>"; };
+		2D20FDD727A30F9D00432A5A /* ViewControllerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerHelper.swift; sourceTree = "<group>"; };
+		2D20FDD927A5639400432A5A /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		2D43C8F0229C4E290002BE47 /* PillsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillsListTableViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		2D43C8F2229C7C8E0002BE47 /* AddPillsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPillsTableViewController.swift; sourceTree = "<group>"; };
 		2D43C8F5229C90BE0002BE47 /* Utlis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utlis.swift; sourceTree = "<group>"; };
 		2D820B3322A52AF900C9801C /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
@@ -46,6 +56,10 @@
 		2DAC8E2B228CC32400857DDF /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		2DB460F3228F0F3700FB70D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2DB8751E22A2D15100118FEB /* PillsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillsTableViewCell.swift; sourceTree = "<group>"; };
+		2DC2122F278F129200EE5112 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		2DC21231278F27CB00EE5112 /* Treatment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Treatment.swift; sourceTree = "<group>"; };
+		2DC21235278F32C200EE5112 /* IntendedMedicine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntendedMedicine.swift; sourceTree = "<group>"; };
+		2DD904A327B2AA4B002A7760 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		2DEB3F90277CAE52005257ED /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
 		2DF4CB772289EBD500A1A815 /* MedIntake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedIntake.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DF4CB7A2289EBD500A1A815 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,8 +109,17 @@
 				2D43C8F5229C90BE0002BE47 /* Utlis.swift */,
 				2D9F0762278DFF8700D98416 /* DateFormatterHelper.swift */,
 				2D9F0764278DFFFE00D98416 /* AlertPresenter.swift */,
+				2D20FDD727A30F9D00432A5A /* ViewControllerHelper.swift */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		2DD904A127B2A9F7002A7760 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2DD904A327B2AA4B002A7760 /* FirebaseService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		2DF4CB6E2289EBD500A1A815 = {
@@ -120,6 +143,7 @@
 		2DF4CB792289EBD500A1A815 /* MedIntake */ = {
 			isa = PBXGroup;
 			children = (
+				2DD904A127B2A9F7002A7760 /* Services */,
 				2D081422278CD40F009DDCAB /* Presenter */,
 				2DEB3F90277CAE52005257ED /* Comments.swift */,
 				2D43C8F4229C90A50002BE47 /* Source */,
@@ -145,6 +169,10 @@
 				2D92B9C8229D6BA4009F75B1 /* Pill.swift */,
 				2DF6532022A1A64F008EEEB4 /* Report.swift */,
 				2D820B3322A52AF900C9801C /* Role.swift */,
+				2DC2122F278F129200EE5112 /* User.swift */,
+				2DC21231278F27CB00EE5112 /* Treatment.swift */,
+				2DC21235278F32C200EE5112 /* IntendedMedicine.swift */,
+				2D20FDD927A5639400432A5A /* Test.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -163,6 +191,7 @@
 				2DAC8E2B228CC32400857DDF /* AuthViewController.swift */,
 				2D43C8F0229C4E290002BE47 /* PillsListTableViewController.swift */,
 				2D43C8F2229C7C8E0002BE47 /* AddPillsTableViewController.swift */,
+				2D20FDD327A05EF600432A5A /* SearchPillViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -297,22 +326,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D92B9C9229D6BA4009F75B1 /* Pill.swift in Sources */,
+				2D20FDD427A05EF600432A5A /* SearchPillViewController.swift in Sources */,
+				2DC21230278F129200EE5112 /* User.swift in Sources */,
 				2D820B3422A52AF900C9801C /* Role.swift in Sources */,
 				2DAC8E29228C7D8500857DDF /* Human.swift in Sources */,
 				2DEB3F91277CAE52005257ED /* Comments.swift in Sources */,
+				2DC21236278F32C200EE5112 /* IntendedMedicine.swift in Sources */,
 				2D43C8F6229C90BE0002BE47 /* Utlis.swift in Sources */,
 				2DF6532122A1A64F008EEEB4 /* Report.swift in Sources */,
 				2D9F0763278DFF8700D98416 /* DateFormatterHelper.swift in Sources */,
 				2DAC8E2C228CC32400857DDF /* AuthViewController.swift in Sources */,
 				2D43C8F1229C4E290002BE47 /* PillsListTableViewController.swift in Sources */,
 				2DB8751F22A2D15100118FEB /* PillsTableViewCell.swift in Sources */,
+				2D20FDDA27A5639400432A5A /* Test.swift in Sources */,
+				2DC21232278F27CB00EE5112 /* Treatment.swift in Sources */,
 				2DF4CB922289EC5C00A1A815 /* Patient.swift in Sources */,
 				2D9F0765278DFFFE00D98416 /* AlertPresenter.swift in Sources */,
 				2DF4CB7B2289EBD500A1A815 /* AppDelegate.swift in Sources */,
 				2D92B9CB229DFCD2009F75B1 /* Theme.swift in Sources */,
 				2DF4CB902289EC0900A1A815 /* Doctor.swift in Sources */,
+				2D20FDD827A30F9D00432A5A /* ViewControllerHelper.swift in Sources */,
 				2D081424278CD439009DDCAB /* AuthViewPresenter.swift in Sources */,
 				2D43C8F3229C7C8E0002BE47 /* AddPillsTableViewController.swift in Sources */,
+				2DD904A427B2AA4B002A7760 /* FirebaseService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,21 +9,33 @@
 import Foundation
 import Firebase
 
-class Patient: Human {
+// user
+class Patient: User {
 
-    var uid: String?
-     var name: String?
-    var email: String?
-    var password: String?
-    var uidRole:String?
-    let link: DatabaseReference?
+ 
+ //   let user : User
+ //   var uidRole:String?
+ //   let link: DatabaseReference?
+    var uidPatient: String?
+    var treatment =  [Treatment]()
+    var reports =  [Report]()
     
-    init(_ snapshot: DataSnapshot) {
-        self.uid = snapshot.value(forKey: "uid") as? String
-        self.name = snapshot.value(forKey: "name") as? String
-        self.email = snapshot.value(forKey: "email") as? String
-        self.password = snapshot.value(forKey: "password") as? String
-        self.uidRole = snapshot.value(forKey: "uidRole") as? String
-        self.link  = snapshot.ref
+    
+    
+    
+    
+     init(snapshot: DataSnapshot ){
+        super.init(snapshot)
+        self.uidPatient = snapshot.key
+        self.treatment = snapshot.value(forKey: "treatments") as? [Treatment] ?? [Treatment]()
+        self.reports = snapshot.value(forKey: "reports") as? [Report] ?? [Report]()
     }
+    
+ 
+    init(uid: String, name: String, email: String, password: String, uidPatient: String ) {
+        super.init(uid: uid, name: name, email: email, password: password)
+        self.uidPatient = uidPatient
+        
+    }
+    
 }

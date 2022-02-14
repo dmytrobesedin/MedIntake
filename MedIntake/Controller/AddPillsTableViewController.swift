@@ -35,6 +35,8 @@ class AddPillsTableViewController: UITableViewController {
     var imagePicker = UIImagePickerController()
     
     
+    private var firebaseService = FirebaseService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -153,16 +155,20 @@ class AddPillsTableViewController: UITableViewController {
                     data = dataIn
                 }else{print("torbless with dataIn")}
             }
-            let ref = Database.database().reference(withPath: "users")
             let base64String = data.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
             
-            guard let  uid  = Auth.auth().currentUser?.uid else {return}
-            let baseRefPills = ref.child(uid).child("pills").childByAutoId()
-            let uidPills = baseRefPills.key
-            let newPills: [String: Any] = [ "uidPill": uidPills, "name":name, "userUid": uid,"description": description,"count": count, "dateStart": dateTimeInterval,"photo": base64String, "intake": isIntake]
+            firebaseService.addPillToFirebase(name: name, description: description, count: count, dateTimeInterval: dateTimeInterval, photo: base64String, isIntake: isIntake)
             
-            baseRefPills.setValue(newPills)
-            self.dismiss(animated: true, completion: nil)
+//            let ref = Database.database().reference(withPath: "users")
+//
+//            
+//            guard let  uid  = Auth.auth().currentUser?.uid else {return}
+//            let baseRefPills = ref.child(uid).child("pills").childByAutoId()
+//            let uidPills = baseRefPills.key
+//            let newPills: [String: Any] = [ "uidPill": uidPills, "name":name, "userUid": uid,"description": description,"count": count, "dateStart": dateTimeInterval,"photo": base64String, "intake": isIntake]
+//            
+//            baseRefPills.setValue(newPills)
+//            self.dismiss(animated: true, completion: nil)
         }
         else{
             let alertPresenter = AlertPresenter()

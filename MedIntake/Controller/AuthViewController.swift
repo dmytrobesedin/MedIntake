@@ -86,7 +86,10 @@ class AuthViewController: UIViewController {
             self.view.frame.origin.y  = 0.0
         }
         
-        
+    
+    
+    
+
     }
     
     
@@ -224,7 +227,7 @@ extension AuthViewController: UITextFieldDelegate,AuthViewProtocol{
     
     
     //
-    func performToMainScreen() {
+    func transitToMainScreen() {
         
         self.dismiss(animated: true)
         self.performSegue(withIdentifier: "Show", sender: nil)
